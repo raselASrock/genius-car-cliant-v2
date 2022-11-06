@@ -7,6 +7,7 @@ const Checkout = () => {
     return (
         <div>
             <h2>{title}</h2>
+            <h3>Click Here</h3>
         </div>
     );
 };
