@@ -7,7 +7,7 @@ import OrderRow from './OrderRow';
 
 const Orders = () => {
     const {user} = useContext(AuthContext);
-    const [orders, setOrders] = useState({});
+    const [orders, setOrders] = useState([]);
     useEffect( () =>{
         fetch(`http://localhost:5000/orders?email=${user.email}`)
         .then(res => res.json())

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 const OrderRow = ({order}) => {
-    const {serviceName,customer,phone, price, service} = order;
+    const {_id, serviceName,customer,phone, price, service} = order;
     const [orderService, setOrderService] = useState({})
 
     useEffect( () =>{
@@ -12,11 +12,24 @@ const OrderRow = ({order}) => {
         .then(data => setOrderService(data) )
     }, [service])
 
+    const handleDelete = id =>{
+        const proceed = window.confirm('Are you sure, you want to cancel this order?')
+        if(proceed){
+            fetch(`http://localhost:5000/orders/${id}`, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data =>{
+                console.log(data)
+            })
+        }
+    }
+
     return (
         <tr>
         <th>
           <label>
-            <button className='btn btn-ghost'>X</button>
+            <button onClick={() => handleDelete(_id)} className='btn btn-ghost'>X</button>
           </label>
         </th>
         <td>
