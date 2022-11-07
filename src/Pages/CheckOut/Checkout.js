@@ -35,11 +35,17 @@ const Checkout = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(order)
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error))
+            body: JSON.stringify(order)  
         })
+        .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data.acknowledge){
+                    alert('Order Placed Successfully')
+                    form.reset()
+                }
+            })
+            .catch(error => console.error(error))
     }
 
     return (
