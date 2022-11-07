@@ -1,19 +1,32 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const OrderRow = ({order}) => {
-    const {serviceName,customer,phone, price, email} = order;
+    const {serviceName,customer,phone, price, service} = order;
+    const [orderService, setOrderService] = useState({})
+
+    useEffect( () =>{
+        fetch(`http://localhost:5000/services/${service}`)
+        .then(res => res.json())
+        .then(data => setOrderService(data) )
+    }, [service])
+
     return (
         <tr>
         <th>
           <label>
-            <input type="checkbox" className="checkbox" />
+            <button className='btn btn-ghost'>X</button>
           </label>
         </th>
         <td>
           <div className="flex items-center space-x-3">
             <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
-                <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+              <div className="rounded w-24 h-24">
+                {
+                    orderService?.img &&
+                    <img src={orderService.img} alt="Avatar Tailwind CSS Component" />
+                }
               </div>
             </div>
             <div>
