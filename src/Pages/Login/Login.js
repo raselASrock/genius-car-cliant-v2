@@ -38,6 +38,8 @@ const Login = () => {
           .then(res => res.json())
           .then(data =>{
             console.log(data)
+            // local storage is the easiest but not the best place to storage data
+            localStorage.setItem('geniusToken', data.token);
           })
           // navigate(from, {replace: true})
         })
