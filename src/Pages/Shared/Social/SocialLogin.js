@@ -1,5 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
+import { setAuthToken } from '../../../api/auth';
 import { AuthContext } from '../../../contexts/Authprovider/AuthProvider';
 
 const SocialLogin = () => {
@@ -11,6 +12,7 @@ const handleGoogleSignIn = () =>{
     .then(result => {
         const user = result.user;
         console.log(user);
+       setAuthToken(user);
     })
     .catch(error => console.error(error))
 }

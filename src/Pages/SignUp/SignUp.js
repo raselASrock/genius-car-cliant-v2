@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { setAuthToken } from "../../api/auth";
 import img from  '../../assets/images/login/login.svg'
 import { AuthContext } from "../../contexts/Authprovider/AuthProvider";
 
@@ -12,6 +13,13 @@ const SignUp = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+        createUser(email,password)
+        .then(result =>{
+          const user = result.user;
+          console.log(user);
+          setAuthToken(user)
+        })
+        .catch(error => console.error(error))
     }
     
   return (
